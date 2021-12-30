@@ -1,0 +1,87 @@
+$colors: (
+    "main": rgb(49,130,211),
+    "secondary": rgb(239,237,251),
+);
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    body {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 30vh 0;
+    height: 100vh;
+    background-color: map-get($colors, "main");
+    font-size: 1.4rem;
+    
+    @media screen and (min-width: 1200px) {
+        flex-direction: row;
+    }
+}
+
+section {
+    width: 45%;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: map-get($colors, "secondary");
+
+    @media screen and (min-width: 1200px) {
+        max-width: 50vw;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    position: relative;
+}
+
+label {
+    visibility: hidden;
+    position: absolute;
+    left: 1rem;
+}
+
+input {
+}
+
+table {
+    overflow-y: scroll;
+}
+
+th {
+    width: 15%;
+    text-align: center;
+}
+
+tr {
+    text-align: center;
+    background-color: map-get($colors, "secondary");
+   &:nth-child(even) {
+       background-color: #fff;
+   } 
+}
+
+
+/* || IDs */
+#form-section {
+    max-width: 30%;
+}
+#data-section {
+    width: 100%;
+}
