@@ -1,7 +1,19 @@
-import React from "react";
-import { PatientDataRow } from "./PatientDataRow";
+import React from 'react';
+import { PatientData } from './PatientData';
 
-export const DataTable = () => {
+export type DataTableProps = {
+  patients: {
+    _id?: string,
+    name: string,
+    fatherSurname: string,
+    motherSurname: string,
+    rut: string,
+    state: string,
+    city: string
+  }[]
+};
+
+export const DataTable = (props: DataTableProps) => {
     return (
         <table>
         <thead>
@@ -15,9 +27,7 @@ export const DataTable = () => {
           </tr>
         </thead>
         <tbody>
-          <PatientDataRow />
-          <PatientDataRow />
-          <PatientDataRow />
+          { props.patients.map( patient => <PatientData key={ patient._id } patient={ patient }/>) }
         </tbody>
       </table>
     );

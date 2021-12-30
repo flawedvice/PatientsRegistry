@@ -1,31 +1,31 @@
 import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
+import { Patient, PatientsCollection } from '/imports/database/PatientsCollection';
 
-function insertLink(title: string, url: string) {
-  LinksCollection.insert({ title, url, createdAt: new Date() });
-}
+const insertPatient = (patient: Patient) => {
+  PatientsCollection.insert(patient);
+};
 
 Meteor.startup(() => {
-  // If the Links collection is empty, add some data.
-  if (LinksCollection.find().count() === 0) {
-    insertLink(
-      'Do the Tutorial',
-      'https://www.meteor.com/tutorials/react/creating-an-app'
-    );
-
-    insertLink(
-      'Follow the Guide',
-      'http://guide.meteor.com'
-    );
-
-    insertLink(
-      'Read the Docs',
-      'https://docs.meteor.com'
-    );
-
-    insertLink(
-      'Discussions',
-      'https://forums.meteor.com'
-    );
+  if (PatientsCollection.find().count() === 0) {
+    [
+      {
+        name: 'Vicente',
+        fatherSurname: 'Aranda',
+        motherSurname: 'Ahumada',
+        rut: '20.427.305-7',
+        state: 'Región Metropolitana',
+        city: 'Peñaflor',
+        createdAt: new Date()
+      },
+      {
+        name: 'Francisca',
+        fatherSurname: 'Streuly',
+        motherSurname: 'Adrian',
+        rut: '20.271.330-0',
+        state: 'Región Metropolitana',
+        city: 'Peñaflor',
+        createdAt: new Date()
+      }
+    ].forEach(insertPatient);
   }
 });
