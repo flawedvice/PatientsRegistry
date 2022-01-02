@@ -1,10 +1,13 @@
 import React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTracker } from 'meteor/react-meteor-data';
-import { DataTable } from './DataTable';
-import { PatientForm } from './PatientForm';
+
 import { Patient, PatientsCollection } from '../database/PatientsCollection';
-import { Fields } from './PatientForm';
+import { State, StatesCollection } from '../database/StatesCollection';
+
+import { Fields, PatientForm } from './PatientForm';
+import { DataTable } from './DataTable';
+
 
 
 export const App = () => {

@@ -1,31 +1,18 @@
 import { Meteor } from 'meteor/meteor';
-import { Patient, PatientsCollection } from '/imports/database/PatientsCollection';
+import { PatientsCollection } from '/imports/database/PatientsCollection';
+import { State, StatesCollection } from '/imports/database/StatesCollection';
 
-const insertPatient = (patient: Patient) => {
-  PatientsCollection.insert(patient);
+
+const States = require('../imports/database/States.json');
+const insertState = (state: State) => {
+  StatesCollection.insert(state)
 };
 
+
 Meteor.startup(() => {
-  if (PatientsCollection.find().count() === 0) {
-    [
-      {
-        name: 'Vicente',
-        fatherSurname: 'Aranda',
-        motherSurname: 'Ahumada',
-        rut: '20.427.305-7',
-        state: 'Región Metropolitana',
-        city: 'Peñaflor',
-        createdAt: new Date()
-      },
-      {
-        name: 'Francisca',
-        fatherSurname: 'Streuly',
-        motherSurname: 'Adrian',
-        rut: '20.271.330-0',
-        state: 'Región Metropolitana',
-        city: 'Peñaflor',
-        createdAt: new Date()
-      }
-    ].forEach(insertPatient);
+  console.log(PatientsCollection.find().count());
+  if (StatesCollection.find().count() === 0) {
+    States.regiones.forEach( (state: State) => insertState(state));
   }
+  
 });

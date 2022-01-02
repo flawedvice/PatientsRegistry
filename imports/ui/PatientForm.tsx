@@ -11,12 +11,13 @@ type PatientFormProps = {
 };
 
 export const PatientForm = (props: PatientFormProps) => {
+
+    // Get states and cities
     
     // Register new patients
     const {
         register,
         reset,
-        setError,
         handleSubmit,
         formState: {errors, isSubmitSuccessful}
     } = useForm<Fields>();
