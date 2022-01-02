@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Patient } from '../database/PatientsCollection';
+import { validateRut, cleanRut } from 'rutlib/lib';
 
 
 export type Fields = Patient;
@@ -9,37 +10,73 @@ type PatientFormProps = {
     onSubmit: (data: any) => void
 };
 
-
 export const PatientForm = (props: PatientFormProps) => {
-
+    
     // Register new patients
-    const { register, handleSubmit, formState: {errors} } = useForm<Fields>();
+    const {
+        register,
+        reset,
+        setError,
+        handleSubmit,
+        formState: {errors, isSubmitSuccessful}
+    } = useForm<Fields>();
+    
+    useEffect(() => {
+        reset();
+    }, [isSubmitSuccessful]);
+
+    
+  /*
+    const rutValidation: ( rut: string ) => boolean = (rut) => {
+    //If rut is invalid, set error:
+    if (!validateRut(rut)) {
+      console.log('rut es inválido');
+      return false;
+    }
+    else {
+      console.log('rut válido! :D');
+      return true;
+    }
+  };
+  */
 
     return (
         <form onSubmit={ handleSubmit(props.onSubmit) }>
             <div className="form-group">
                 <label htmlFor="name">Nombres</label>
-                <input type="text" { ...register("name", { required: true }) } id="name" placeholder="Nombres"/>
+                <input autoComplete='off' type="text" { ...register("name", { required: true }) } id="name" placeholder="Nombres"/>
                 { errors.name && <span>Este campo es obligatorio</span> }
             </div>
             <div className="form-group">
                 <label htmlFor="fatherSurname">Apellido Paterno</label>
-                <input type="text" { ...register("fatherSurname", { required: true }) } id="fatherSurname" placeholder="Apellido Paterno"/>
+                <input autoComplete='off' type="text" { ...register("fatherSurname", { required: true }) } id="fatherSurname" placeholder="Apellido Paterno"/>
                 { errors.fatherSurname && <span>Este campo es obligatorio</span> }
             </div>
             <div className="form-group">
                 <label htmlFor="motherSurname">Apellido Materno</label>
-                <input type="text" { ...register("motherSurname", { required: true }) } id="motherSurname" placeholder="Apellido Materno"/>
+                <input autoComplete='off' type="text" { ...register("motherSurname", { required: true }) } id="motherSurname" placeholder="Apellido Materno"/>
                 { errors.motherSurname && <span>Este campo es obligatorio</span> }
             </div>
+
             <div className="form-group">
                 <label htmlFor="rut">RUT</label>
-                <input type="text" { ...register("rut", { required: true }) } id="rut" placeholder="RUT"/>
-                { errors.rut && <span>Este campo es obligatorio</span> }
+                <input 
+                    autoComplete='off' 
+                    type="text" 
+                    id="rut" 
+                    placeholder="RUT" 
+                    {
+                        ...register('rut', {
+                            required: true,
+                            validate: rut => rut.length >= 8 ? validateRut(cleanRut(rut)) : false
+                        }) 
+                    } />
+                { errors.rut && <span>Rut no existente</span> }
             </div>
+            
             <div className="form-group">
                 <label htmlFor="state">Región</label>
-                <select { ...register("state") } id="state">
+                <select { ...register("state", { required: true }) } id="state">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -49,7 +86,7 @@ export const PatientForm = (props: PatientFormProps) => {
             </div>
             <div className="form-group">
                 <label htmlFor="city">Comuna</label>
-                <select { ...register("city") } id="city">
+                <select { ...register("city", { required: true }) } id="city">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

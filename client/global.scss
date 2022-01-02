@@ -69,9 +69,10 @@ th {
 tr {
     text-align: center;
     background-color: map-get($colors, "secondary");
-   &:nth-child(even) {
-       background-color: #fff;
-   } 
+
+    &:nth-child(even) {
+        background-color: #fff;
+    }
 }
 
 
