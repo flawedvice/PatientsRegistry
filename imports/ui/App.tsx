@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { SubmitHandler } from 'react-hook-form';
 import { useTracker } from 'meteor/react-meteor-data';
 import { formatRut } from 'rutlib/lib';
@@ -25,7 +26,7 @@ export const App = () => {
   const onSubmit:SubmitHandler<Fields> = (data: Patient) => {
     data.rut = formatRut(data.rut);
     data.createdAt = new Date();
-    PatientsCollection.insert(data);
+    Meteor.call('patients.insert', data);
   };
   
   

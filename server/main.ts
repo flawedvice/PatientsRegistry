@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
+
 import { PatientsCollection } from '/imports/database/PatientsCollection';
 import { State, StatesCollection } from '/imports/database/StatesCollection';
+import '/imports/api/patientsMethods';
 
 
 const States = require('../imports/database/States.json');

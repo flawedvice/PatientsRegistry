@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
+    "jest": "jest",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
@@ -20,6 +21,7 @@
     "@types/mocha": "^8.2.3",
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.9",
+    "jest": "^27.4.5",
     "typescript": "^4.4.4"
   },
   "meteor": {
