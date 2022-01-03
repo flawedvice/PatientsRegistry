@@ -14,7 +14,9 @@ import { DataTable } from './DataTable';
 export const App = () => {
 
   // Get patients from db
-  const patients = useTracker(() => PatientsCollection.find({}).fetch());
+  const patients = useTracker(() => PatientsCollection.find({}, {
+    sort: { createdAt: -1 }
+  }).fetch());
 
   // Get states from db
   const states:any = StatesCollection.find({}).fetch();
@@ -22,6 +24,7 @@ export const App = () => {
 
   const onSubmit:SubmitHandler<Fields> = (data: Patient) => {
     data.rut = formatRut(data.rut);
+    data.createdAt = new Date();
     PatientsCollection.insert(data);
   };
   
