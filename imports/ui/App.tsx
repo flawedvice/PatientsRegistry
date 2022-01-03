@@ -15,6 +15,10 @@ export const App = () => {
   // Get patients from db
   const patients = useTracker(() => PatientsCollection.find({}).fetch());
 
+  // Get states from db
+  const states = useTracker(() => StatesCollection.find({}).fetch());
+
+
   const onSubmit:SubmitHandler<Fields> = (data: Patient) => {
     PatientsCollection.insert(data);
   };
@@ -23,7 +27,7 @@ export const App = () => {
   return (
     <main>
       <section id="form-section">
-        <PatientForm onSubmit={ onSubmit }/>
+        <PatientForm onSubmit={ onSubmit } states={ states }/>
       </section>
       <section id="data-section">
         <DataTable patients={ patients } />

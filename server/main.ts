@@ -14,5 +14,4 @@ Meteor.startup(() => {
   if (StatesCollection.find().count() === 0) {
     States.regiones.forEach( (state: State) => insertState(state));
   }
-  
 });

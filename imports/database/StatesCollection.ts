@@ -2,6 +2,7 @@ import { Mongo } from "meteor/mongo";
 
 
 export type State = {
+    _id?: string,
     region: string,
     comunas: string[],
 }
