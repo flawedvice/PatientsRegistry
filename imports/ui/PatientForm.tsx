@@ -116,7 +116,7 @@ export const PatientForm = (props: PatientFormProps) => {
                 { errors.city && <span>Este campo es obligatorio.</span> }
             </div>
 
-            <button type="submit">Crear Registro</button>
+            <button type="submit" style={{"margin": "2rem"}}>Crear Registro</button>
         </form>
     );
 };
