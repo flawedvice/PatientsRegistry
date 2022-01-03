@@ -1,6 +1,7 @@
 import React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTracker } from 'meteor/react-meteor-data';
+import { formatRut } from 'rutlib/lib';
 
 import { Patient, PatientsCollection } from '../database/PatientsCollection';
 import { State, StatesCollection } from '../database/StatesCollection';
@@ -20,6 +21,7 @@ export const App = () => {
 
 
   const onSubmit:SubmitHandler<Fields> = (data: Patient) => {
+    data.rut = formatRut(data.rut);
     PatientsCollection.insert(data);
   };
   

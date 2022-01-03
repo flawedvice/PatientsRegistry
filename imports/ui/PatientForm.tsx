@@ -78,7 +78,17 @@ export const PatientForm = (props: PatientFormProps) => {
             
             <div className="form-group">
                 <label htmlFor="state">Región</label>
-                <select { ...register("state", { required: true }) } id="state" onChange={(e) => onStateChange(e.target.value)} defaultValue='default'>
+                <select {
+                    ...register("state", {
+                        required: true,
+                        validate: state => state !== 'default' ? true : false
+                    }) 
+                    }
+                    id="state" 
+                    onChange={(e) => onStateChange(e.target.value)} 
+                    defaultValue='default'
+                    >
+
                     <option value='default' disabled hidden>Selecciona una Región</option>
                     {
                         props.states.sort().map( state => <option key={state._id} value={state.region}>{state.region}</option>)
@@ -88,7 +98,16 @@ export const PatientForm = (props: PatientFormProps) => {
             </div>
             <div className="form-group">
                 <label htmlFor="city">Comuna</label>
-                <select { ...register("city", { required: true }) } id="city" defaultValue='default'>
+                <select {
+                    ...register("city", {
+                        required: true,
+                        validate: city => city !== 'default' ? true : false
+                    }) 
+                    } 
+                    id="city" 
+                    defaultValue='default'
+                    >
+
                     <option value='default' disabled hidden>Selecciona una Comuna</option>
                     {
                         cities.sort().map( city => <option key={city}>{city}</option>)
