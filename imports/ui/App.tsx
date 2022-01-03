@@ -4,7 +4,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { formatRut } from 'rutlib/lib';
 
 import { Patient, PatientsCollection } from '../database/PatientsCollection';
-import { State, StatesCollection } from '../database/StatesCollection';
+import { StatesCollection } from '../database/StatesCollection';
 
 import { Fields, PatientForm } from './PatientForm';
 import { DataTable } from './DataTable';
@@ -17,7 +17,7 @@ export const App = () => {
   const patients = useTracker(() => PatientsCollection.find({}).fetch());
 
   // Get states from db
-  const states = useTracker(() => StatesCollection.find({}).fetch());
+  const states:any = StatesCollection.find({}).fetch();
 
 
   const onSubmit:SubmitHandler<Fields> = (data: Patient) => {
